@@ -1,2 +1,2 @@
 # nettyDemo
-写了一些netty底层实现的小demo。simple tricks on netty
+some  tricks on netty ,an fundamental java  io lib .
