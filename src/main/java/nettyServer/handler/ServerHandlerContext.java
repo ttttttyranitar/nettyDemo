@@ -35,7 +35,7 @@ public abstract class ServerHandlerContext extends ChannelInboundHandlerAdapter 
      *
      *
      * @description 注册处理客户端channel 的handler
-     * @params
+     * @params ChannelPipeline pipeline
      * @return
      *
      */

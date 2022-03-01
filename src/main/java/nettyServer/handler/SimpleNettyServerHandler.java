@@ -35,9 +35,12 @@ public class SimpleNettyServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        //这里需要serverSocketChannel接收的的socketChannel注册到eventLoopGroup中，并且埋下处理serverSocketChannel的handler
+        //这样也就有能力实现一个eventLoopGroup专门从serverSocketChannel中接收socketChannel，另外一个group真正处理socketChannel。
         SocketChannel channel = (SocketChannel) msg;
-        eventLoopGroup.register(channel);
         channel.pipeline().addLast(context);
+        eventLoopGroup.register(channel);
+
 
     }
 }

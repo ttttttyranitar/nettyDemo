@@ -27,7 +27,7 @@ public class SimpleNettyServerWithBootstrap {
         NioEventLoopGroup eventExecutors = new NioEventLoopGroup(8);
         ServerBootstrap bootstrap = new ServerBootstrap();
         ChannelFuture channelFuture = bootstrap
-                .group(eventExecutors)
+                .group(eventExecutors,eventExecutors)
                 .channel(NioServerSocketChannel.class)
                 //加载从serverSocketChannel中获取的socketChannel的处理逻辑。
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {

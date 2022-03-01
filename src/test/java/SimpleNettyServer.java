@@ -3,8 +3,10 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import nettyClient.handlerAdapter.SimpleEchoChannelHandler;
 import nettyServer.handler.ServerHandlerContext;
 import nettyServer.handler.SimpleNettyServerHandler;
+import nettyServer.service.SimpleRpcService;
 import org.junit.Test;
 
 import java.net.InetSocketAddress;
@@ -26,13 +28,15 @@ public class SimpleNettyServer {
     public void testNettyServer() throws Exception {
         NioEventLoopGroup eventExecutors = new NioEventLoopGroup();
 
+
+
         NioServerSocketChannel nioServerSocketChannel = new NioServerSocketChannel();
 
         //绑定事件处理逻辑
         nioServerSocketChannel.pipeline().addLast(new SimpleNettyServerHandler(eventExecutors, new ServerHandlerContext() {
             @Override
             public void registerHandler(ChannelPipeline pipeline) {
-                pipeline.addLast(new ChannelInboundHandlerAdapter());
+                pipeline.addLast(new SimpleEchoChannelHandler());
             }
         }));
         ChannelFuture registerFuture = eventExecutors.register(nioServerSocketChannel);
